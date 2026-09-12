@@ -82,13 +82,18 @@ If you need true redaction, use a tool built for it.
 ```
 pdf-toolbox/
 ├── index.html          all views/screens (single page app)
-├── css/style.css        design system + layout
-└── js/
-    ├── utils.js          shared helpers (file I/O, dropzone, toasts, sorting)
-    ├── router.js         hash-based view switching
-    ├── main.js           bootstraps pdf.js worker + all tools
-    └── tool-*.js         one file per tool, each a self-contained module
+├── style.css            design system + layout
+├── utils.js             shared helpers (file I/O, dropzone, toasts, sorting)
+├── router.js            hash-based view switching
+├── main.js              bootstraps pdf.js worker + all tools
+└── tool-*.js            one file per tool, each a self-contained module
 ```
+
+Everything is deliberately flat (no subfolders) so it survives being dragged
+into GitHub's web upload UI, which doesn't preserve folder structure unless
+you drag a folder itself rather than the files inside it. If you'd rather use
+folders, that's fine too — just make sure the `<link>`/`<script>` paths in
+`index.html` are updated to match wherever you put things.
 
 Each tool file exposes a single `init()` — `main.js` calls all of them once
 on load. No framework, no bundler; every file is loaded as a plain `<script>`
